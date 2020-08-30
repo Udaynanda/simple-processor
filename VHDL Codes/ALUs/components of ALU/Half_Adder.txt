@@ -1,0 +1,18 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity half is
+	port(
+		a,b: in std_logic;
+		s,c: out std_logic
+		);
+	end half;
+
+	architecture structural of half is
+
+	begin
+		s <= a xor b;
+		c <= a and b;
+
+end structural;

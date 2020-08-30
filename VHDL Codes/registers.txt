@@ -1,0 +1,28 @@
+
+library IEEE;
+
+use IEEE.STD_LOGIC_1164.ALL;
+
+use IEEE.STD_LOGIC_ARITH.ALL;
+
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity Reg is
+	port(clk :in std_logic;
+			D : in std_logic_vector(7 downto 0);
+			Q : out std_logic_vector(7 downto 0));
+end Reg;
+
+-- positive triggered
+
+architecture Behavioral of Reg is
+
+begin
+	process(clk)
+	begin
+		if(clk'event and clk='1')then 
+			Q <= D;
+		end if;
+	end process;
+end Behavioral;
+

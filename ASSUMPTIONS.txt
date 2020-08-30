@@ -1,0 +1,9 @@
+-> Part - A of the project is implemented.
+-> The output carry will be 'X' (Don't Care) for all other operations except sum and difference.
+-> THE OUTPUT STARTS FROM THE FIRST RISING EDGE OF THE CLOCK.
+-> For sub-problem 'F'(A6) : THE TERM REMAINING CYCLES HAS BEEN CONSIDERED AS IF ALL THE CYCLES 
+			     AFTER THE 6TH CYCLE i.e. 7,8,9,10,11,12,13,14,15,16...
+-> SIMILAR ASSUMPTION WAS MADE FOR THE NEXT SUBPROBLEM 'G'(A7) i.e. THE OUTPUT FOR ALL THE CYCLES 
+   AFTER THE 8TH CYCLE WOULD BE "XXXXXXXX" (Don't Care).
+-> TIME PERIOD OF THE CLOCK : (FOR SUBPROBLES A, B, C, D, H) := 100 NS
+			      (FOR SUBPROBLEMS E, F, G)      := 50 NS  

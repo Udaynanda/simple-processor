@@ -1,0 +1,29 @@
+library IEEE;
+
+use IEEE.STD_LOGIC_1164.ALL;
+
+use IEEE.STD_LOGIC_ARITH.ALL;
+
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity controller5 is
+	port(clkCount : in std_logic_vector(2 downto 0);
+			aluSelect : out std_logic_vector(2 downto 0);
+			enable_alu,same_alu : out std_logic
+			);
+end controller5;
+
+architecture Behavioral of controller5 is
+begin
+	same_alu <= '1';
+	process(clkCount)
+		begin
+		if(clkCount = "111")then
+			aluSelect <= "000";
+		else aluSelect <= "101";
+		end if;
+		enable_alu <= '1';
+	end process;
+
+end Behavioral;
+

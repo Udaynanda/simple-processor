@@ -1,0 +1,26 @@
+library IEEE;
+
+use IEEE.STD_LOGIC_1164.ALL;
+
+use IEEE.STD_LOGIC_ARITH.ALL;
+
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+
+entity mod8 is
+	port (clk,reset  : in STD_LOGIC;
+			clkCount :inout STD_LOGIC_VECTOR(2 downto 0));
+end mod8;
+
+architecture Behavioral of mod8 is
+begin
+	process(clk,reset)
+		begin
+			if(reset = '1')then
+				clkCount <= "000";
+			elsif (clk'event and clk = '1')then
+				clkCount <= clkCount + 1;
+			end if;
+	end process;
+end Behavioral;
+

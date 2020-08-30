@@ -1,0 +1,40 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity bitsub is
+port(
+a,b: in std_logic_vector(7 downto 0);
+difference: out std_logic_vector(7 downto 0);
+borrow:out std_logic
+);
+end bitsub;
+
+architecture structural of bitsub is
+component half_sub is
+port(
+a,b: in std_logic;
+diff,bor: out std_logic
+);
+end component;
+component subtract is
+port(
+a,b,c: in std_logic;
+diff,bor:out std_logic
+);	
+end component;
+signal c0,c1,c2,c3,c4,c5,c6: std_logic;
+signal bm: std_logic;
+signal d: std_logic_vector(7 downto 0);
+signal m: std_logic_vector(7 downto 0);
+
+
+begin
+d0: half_sub port map(a=>a(0),b=>b(0),diff=>difference(0),bor=>c0);
+d1: subtract port map(a=>a(1),b=>b(1),c=>c0,diff=>difference(1),bor=>c1);
+d2: subtract port map(a=>a(2),b=>b(2),c=>c1,diff=>difference(2),bor=>c2);
+d3: subtract port map(a=>a(3),b=>b(3),c=>c2,diff=>difference(3),bor=>c3);
+d4: subtract port map(a=>a(4),b=>b(4),c=>c3,diff=>difference(4),bor=>c4);
+d5: subtract port map(a=>a(5),b=>b(5),c=>c4,diff=>difference(5),bor=>c5);
+d6: subtract port map(a=>a(6),b=>b(6),c=>c5,diff=>difference(6),bor=>c6);
+d7: subtract port map(a=>a(7),b=>b(7),c=>c6,diff=>difference(7),bor=>borrow);
+end structural;

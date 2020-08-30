@@ -1,0 +1,16 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+entity adder is
+port(
+a,b,c: in std_logic;
+sum,carry : out std_logic)
+;
+end adder;
+
+architecture structural of adder is
+
+begin
+sum <= a xor b xor c;
+carry<= (a and b) or (c and a) or (c and b);
+end structural;

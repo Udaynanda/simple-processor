@@ -1,0 +1,83 @@
+library IEEE;
+
+use IEEE.STD_LOGIC_1164.ALL;
+
+use IEEE.STD_LOGIC_ARITH.ALL;
+
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity ALU_new is
+port(
+a: in std_logic_vector(7 downto 0);
+b: in std_logic_vector(7 downto 0);
+enable,same : in std_logic;
+cOut: inout std_logic_vector(7 downto 0);
+carry: inout std_logic ;
+selec: in std_logic_vector(2 downto 0)
+);
+end ALU_new;
+
+architecture structural of ALU_new is
+component bitadd is
+port(
+a,b : in std_logic_vector(7 downto 0);
+sum: out std_logic_vector(7 downto 0);
+carry: out std_logic
+);
+end component;
+
+component bitsub is
+port(
+a,b: in std_logic_vector(7 downto 0);
+difference: out std_logic_vector(7 downto 0);
+borrow:out std_logic
+);
+end component;
+
+signal su,di,ina,inb: std_logic_vector(7 downto 0);
+signal ca,bo : std_logic; 
+--signal inva, invb : std_logic_vector(7 downto 0);
+
+begin
+s1: bitadd port map(a=>a,b=>b,sum=>su,carry=>ca);
+d1: bitsub port map(a=>a,b=>b,difference=>di,borrow=>bo);
+
+process(enable,a,b,selec,su,di,ina,inb,ca,bo,cOut,carry,same)
+
+begin
+	
+	if(enable = '1') then
+		
+		if(selec="000") then
+			cOut<=su;carry<=ca;
+		elsif(selec="001")then
+			cOut<=di;carry<=bo;
+		elsif(selec="010")then
+			cOut<=a and b;
+			carry <= 'X';
+		elsif(selec="011")then
+			cOut<= a or b;
+			carry <= 'X';
+		elsif(selec="100")then
+			cOut<= a nand b;
+			carry <= 'X';
+		elsif(selec="101")then
+			if same = '0' then
+				cOut<=a xor b;
+			else cout <= a xor a;
+			end if;
+			carry <= 'X';
+		elsif(selec="110")then
+			cOut <= not a;
+			carry <= 'X';
+		elsif(selec="111")then
+			cOut <= not b;
+			carry <= 'X';
+		else cOut <= "ZZZZZZZZ";
+		end if;	
+	else
+		cOut <= "ZZZZZZZZ";
+	end if;
+end process;
+
+end structural;
